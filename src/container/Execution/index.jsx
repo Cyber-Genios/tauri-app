@@ -198,80 +198,80 @@ export const Execution = () => {
   };
 
   const execute = async () => {
-    // await schedule(presetDate, setPresetMessage);
-    // const presetProdutoID = await retry(
-    //   buscarInformacoesProdutoFN,
-    //   { cookie, url: presetUrl, tamanho: presetNumber },
-    //   10000,
-    //   "Buscar informações do produto de preset",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    await schedule(presetDate, setPresetMessage);
+    const presetProdutoID = await retry(
+      buscarInformacoesProdutoFN,
+      { cookie, url: presetUrl, tamanho: presetNumber },
+      10000,
+      "Buscar informações do produto de preset",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // await retry(
-    //   adicionarCarrinhoFN,
-    //   {
-    //     cookie,
-    //     url: presetUrl,
-    //     productId: presetProdutoID,
-    //   },
-    //   10000,
-    //   "Adicionar produto preset no carrinho",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    await retry(
+      adicionarCarrinhoFN,
+      {
+        cookie,
+        url: presetUrl,
+        productId: presetProdutoID,
+      },
+      10000,
+      "Adicionar produto preset no carrinho",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // const deliveryInfo = await retry(
-    //   buscarInformacoesEntregaFN,
-    //   { cookie },
-    //   10000,
-    //   "Buscar informações de entrega",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    const deliveryInfo = await retry(
+      buscarInformacoesEntregaFN,
+      { cookie },
+      10000,
+      "Buscar informações de entrega",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // setExecutionParams({
-    //   ...executionParams,
-    //   deliveryInformations: deliveryInfo,
-    // });
+    setExecutionParams({
+      ...executionParams,
+      deliveryInformations: deliveryInfo,
+    });
 
-    // const deliveryType = await retry(
-    //   buscarTipoEntregaFN,
-    //   { cookie, cep: deliveryInfo.address },
-    //   10000,
-    //   "Buscar tipo de entrega",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    const deliveryType = await retry(
+      buscarTipoEntregaFN,
+      { cookie, cep: deliveryInfo.address },
+      10000,
+      "Buscar tipo de entrega",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // await retry(
-    //   selecionarEntregaFN,
-    //   { cookie, deliveryType },
-    //   10000,
-    //   "Selecionar entrega",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    await retry(
+      selecionarEntregaFN,
+      { cookie, deliveryType },
+      10000,
+      "Selecionar entrega",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // const cardInformations = await retry(
-    //   buscarCartoesFN,
-    //   { cookie },
-    //   10000,
-    //   "Buscar informações do cartão",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    const cardInformations = await retry(
+      buscarCartoesFN,
+      { cookie },
+      10000,
+      "Buscar informações do cartão",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
-    // setExecutionParams({ ...executionParams, cardInformations });
+    setExecutionParams({ ...executionParams, cardInformations });
 
-    // await retry(
-    //   limparCarrinhoFN,
-    //   { cookie, productId: presetProdutoID },
-    //   10000,
-    //   "Limpar carrinho",
-    //   setExecutionMessage,
-    //   setErrorMessage
-    // );
+    await retry(
+      limparCarrinhoFN,
+      { cookie, productId: presetProdutoID },
+      10000,
+      "Limpar carrinho",
+      setExecutionMessage,
+      setErrorMessage
+    );
 
     await schedule(execDate, setWaitExecutionMessage);
 
