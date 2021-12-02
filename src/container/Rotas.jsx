@@ -14,7 +14,7 @@ export default function Rotas() {
       "https://www.nike.com.br/kwondo1-153-169-211-371911",
     execNumber: "38",
     execPhone: "21995946491",
-    presetDate: "2021-12-09:30:00",
+    presetDate: "2021-12-03T09:30:00",
     presetUrl:
       "https://www.nike.com.br/tenis-nike-pegasus-trail-3-masculino-153-169-224-324706?gridPosition=G1",  
     presetNumber: "38",
