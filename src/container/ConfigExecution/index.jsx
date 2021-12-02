@@ -32,7 +32,7 @@ export const ConfigExecution = ({ classes }) => {
       execution.presetDate &&
       execution.presetUrl &&
       execution.presetNumber ? (
-      <Link to="/teste">
+      <Link to="/execution">
         <button>Executar</button>
       </Link>
     ) : (

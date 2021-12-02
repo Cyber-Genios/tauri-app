@@ -10,7 +10,7 @@ export const limparCarrinho = async ({ cookie, productId }) => {
   const payload = `Codigo=${productId}&SiteId=106&customid=`;
   const response = await client.post(
     "https://www.nike.com.br/Carrinho/Excluir",
-    { payload },
+    { type: "Text", payload },
     { headers, timeout: 60000 }
   );
   // const response = await axios({

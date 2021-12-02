@@ -10,7 +10,7 @@ export const buscarTipoEntrega = async ({ cookie, cep }) => {
 
   const { data } = await client.post(
     "https://www.nike.com.br/Frete/CalcularFretePromocao",
-    { type: "x-www-form-urlencoded", payload: `cep=${cep}` },
+    { type: "Text", payload: `cep=${cep}` },
     { headers, timeout: 60000 }
   );
 

@@ -8,9 +8,9 @@ export const buscarCartoes = async ({ cookie }) => {
     origin: "https://www.nike.com.br",
   };
 
-  const response = await client.post(
+  const { data } = await client.post(
     "https://www.nike.com.br/Checkout/VerificaCartoesSalvos",
-    null,
+    { type: "Text", payload: "" },
     { headers, timeout: 60000 }
   );
 
@@ -20,7 +20,6 @@ export const buscarCartoes = async ({ cookie }) => {
   //   headers,
   //   timeout: 60000,
   // });
-  const { data } = requestResponse;
   // if (!data || !data.success) {
   //   throw Error();
   // }

@@ -1,6 +1,11 @@
 import { http } from "@tauri-apps/api";
 
-export const gerarFatorDuplo = async ({ cookie, referer, productId }) => {
+export const gerarFatorDuplo = async ({
+  cookie,
+  referer,
+  productId,
+  telefone,
+}) => {
   const client = await http.getClient();
   const headers = {
     cookie,
@@ -8,10 +13,10 @@ export const gerarFatorDuplo = async ({ cookie, referer, productId }) => {
     origin: "https://www.nike.com.br",
     referer,
   };
-  const payload = `CelularCliente=${executionParams.phoneNumber}&ProdutoId=${productId}`;
+  const payload = `CelularCliente=${telefone}&ProdutoId=${productId}`;
   const { data } = await client.post(
     "https://www.nike.com.br/auth/two-factor/generate",
-    { payload },
+    { type: "Text", payload },
     { headers, timeout: 60000 }
   );
   // const { data } = await axios({
@@ -26,5 +31,5 @@ export const gerarFatorDuplo = async ({ cookie, referer, productId }) => {
   //   throw Error();
   // }
 
-  return;
+  return data;
 };

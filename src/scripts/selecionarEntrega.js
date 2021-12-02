@@ -10,7 +10,7 @@ export const selecionarEntrega = async ({ cookie, deliveryType }) => {
   const payload = `hash=&tipoEntrega=${deliveryType}`;
   const response = await client.post(
     "https://www.nike.com.br/Frete/EscolheFreteCarrinho",
-    { payload },
+    { type: "Text", payload },
     { headers, timeout: 60000 }
   );
   // const response = await axios({

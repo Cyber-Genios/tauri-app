@@ -1,4 +1,4 @@
-export const getFatorDuploID = async ({ data, tamanho }) => {
+export const getProdutoID = async ({ data, tamanho }) => {
   const productDetails = JSON.parse(data.DetalheProduto).variacoesProduto;
   const inputRegex = `<input type="radio" class="tamanho__item_pdp js-tamanho__item_pdp" data-tamanho="${tamanho}"(.*?)(.*?)>`;
   const codigoProdutoRegex = `data-codigoproduto="(.*?)"`;

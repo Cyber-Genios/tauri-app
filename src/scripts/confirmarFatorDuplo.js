@@ -17,7 +17,7 @@ export const confirmarFatorDuplo = async ({
   const payload = `NumberCode=${code}&ProdutoId=${productId}`;
   const { data } = await client.post(
     "https://www.nike.com.br/auth/two-factor/validate",
-    { payload },
+    { type: "Text", payload },
     { headers, timeout: 60000 }
   );
 
@@ -33,5 +33,5 @@ export const confirmarFatorDuplo = async ({
   //   throw Error();
   // }
 
-  return;
+  return data;
 };

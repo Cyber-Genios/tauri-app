@@ -17,8 +17,8 @@ export const adicionarCarrinho = async ({
 
   const { data } = await client.post(
     "https://www.nike.com.br/Carrinho/Adicionar",
-    { payload },
-    { headers, timeout: 60000 }
+    { type: "Text", payload },
+    { headers, timeout: 10000 }
   );
 
   // const { data } = await axios({
