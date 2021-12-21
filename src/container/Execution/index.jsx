@@ -42,6 +42,12 @@ export const Execution = () => {
     deliveryInformations: {},
   });
 
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   const buscarInformacoesProdutoFN = async ({
     cookie,
     url,
@@ -119,7 +125,7 @@ export const Execution = () => {
     await retry(
       gerarFatorDuploFN,
       { cookie, referer, productId, telefone },
-      10000,
+      getRandomInt(5000, 20000),
       "Gerar código de autenticação dupla",
       setExecutionMessage,
       setErrorMessage
@@ -130,7 +136,7 @@ export const Execution = () => {
     await retry(
       confirmarFatorDuploFN,
       { cookie, referer, productId, code },
-      10000,
+      getRandomInt(5000, 20000),
       "Confimar código de autenticação dupla",
       setExecutionMessage,
       setErrorMessage
@@ -159,7 +165,7 @@ export const Execution = () => {
           url: execUrl,
           productId: executionParams.productId,
         },
-        10000,
+        getRandomInt(5000, 20000),
         "Adicionar produto no carrinho",
         setExecutionMessage,
         setErrorMessage
@@ -171,7 +177,7 @@ export const Execution = () => {
           cardInformations: executionParams.cardInformations,
           deliveryInformations: executionParams.deliveryInformations,
         },
-        10000,
+        getRandomInt(5000, 20000),
         "Finalizar compra",
         setExecutionMessage,
         setErrorMessage
@@ -202,7 +208,7 @@ export const Execution = () => {
     const presetProdutoID = await retry(
       buscarInformacoesProdutoFN,
       { cookie, url: presetUrl, tamanho: presetNumber },
-      10000,
+      getRandomInt(5000, 20000),
       "Buscar informações do produto de preset",
       setExecutionMessage,
       setErrorMessage
@@ -215,7 +221,7 @@ export const Execution = () => {
         url: presetUrl,
         productId: presetProdutoID,
       },
-      10000,
+      getRandomInt(5000, 20000),
       "Adicionar produto preset no carrinho",
       setExecutionMessage,
       setErrorMessage
@@ -224,7 +230,7 @@ export const Execution = () => {
     const deliveryInfo = await retry(
       buscarInformacoesEntregaFN,
       { cookie },
-      10000,
+      getRandomInt(5000, 20000),
       "Buscar informações de entrega",
       setExecutionMessage,
       setErrorMessage
@@ -238,7 +244,7 @@ export const Execution = () => {
     const deliveryType = await retry(
       buscarTipoEntregaFN,
       { cookie, cep: deliveryInfo.address },
-      10000,
+      getRandomInt(5000, 20000),
       "Buscar tipo de entrega",
       setExecutionMessage,
       setErrorMessage
@@ -247,7 +253,7 @@ export const Execution = () => {
     await retry(
       selecionarEntregaFN,
       { cookie, deliveryType },
-      10000,
+      getRandomInt(5000, 20000),
       "Selecionar entrega",
       setExecutionMessage,
       setErrorMessage
@@ -256,7 +262,7 @@ export const Execution = () => {
     const cardInformations = await retry(
       buscarCartoesFN,
       { cookie },
-      10000,
+      getRandomInt(5000, 20000),
       "Buscar informações do cartão",
       setExecutionMessage,
       setErrorMessage
@@ -267,7 +273,7 @@ export const Execution = () => {
     await retry(
       limparCarrinhoFN,
       { cookie, productId: presetProdutoID },
-      10000,
+      getRandomInt(5000, 20000),
       "Limpar carrinho",
       setExecutionMessage,
       setErrorMessage
@@ -278,7 +284,7 @@ export const Execution = () => {
     const { produtoId, fatorDuploId } = await retry(
       buscarInformacoesProdutoFN,
       { cookie, url: execUrl, tamanho: execNumber, getTwoFactorId: true },
-      10000,
+      getRandomInt(5000, 20000),
       "Buscar informações do produto",
       setExecutionMessage,
       setErrorMessage
@@ -295,7 +301,7 @@ export const Execution = () => {
         url: execUrl,
         productId: produtoId,
       },
-      10000,
+      getRandomInt(5000, 20000),
       "Adicionar produto no carrinho",
       setExecutionMessage,
       setErrorMessage
@@ -309,18 +315,19 @@ export const Execution = () => {
     ) {
       setRenderTwoFactorConfirm(true);
     } else {
-      await retry(
+      const buyResponse = await retry(
         comprarProdutoFN,
         {
           cookie,
           cardInformations: executionParams.cardInformations,
           deliveryInformations: executionParams.deliveryInformations,
         },
-        10000,
+        getRandomInt(5000, 20000),
         "Finalizar compra",
         setExecutionMessage,
         setErrorMessage
       );
+      console.log(buyResponse);
       setExecutionMessage("Compra realizada com sucesso!");
     }
   };

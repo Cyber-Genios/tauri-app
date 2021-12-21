@@ -29,9 +29,11 @@ export const confirmarFatorDuplo = async ({
   //   timeout: 60000,
   // });
 
-  // if (!data || !data.valid) {
-  //   throw Error();
-  // }
+  console.log(data, payload)
+
+  if (!data || !data.valid) {
+    throw Error();
+  }
 
   return data;
 };

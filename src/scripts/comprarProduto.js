@@ -30,8 +30,8 @@ export const comprarProduto = async ({
   //   timeout: 60000,
   // });
   const { data } = response;
-  // if (!data || !data.success) {
-  //   throw Error();
-  // }
+  if (!data || !data.success) {
+    throw Error();
+  }
   return data;
 };
