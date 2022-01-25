@@ -31,6 +31,7 @@ export const comprarProduto = async ({
   // });
   const { data } = response;
   if (!data || !data.success) {
+    console.log(data);
     throw Error();
   }
   return data;

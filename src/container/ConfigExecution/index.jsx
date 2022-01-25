@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Context } from "../../components/Context";
 import { Params } from "../../components/Params";
 import { ParamsPreset } from "./../../components/ParamsPreset";
+import { Proxy } from "./../../components/Proxy";
 import { Box } from "@material-ui/system";
 import { Link } from "react-router-dom";
 import { Tab, Tabs } from "@material-ui/core";
@@ -15,6 +16,7 @@ export const ConfigExecution = ({ classes }) => {
     const tabs = {
       0: <Params />,
       1: <ParamsPreset />,
+      2: <Proxy />,
     };
     return tabs[tab];
   };
@@ -74,6 +76,7 @@ export const ConfigExecution = ({ classes }) => {
           >
             <StyledTab label="Execução" />
             <StyledTab label="Preset" />
+            <StyledTab label="Proxy" />
           </StyledTabs>
         </Box>
         {renderTab(currentTab)}
